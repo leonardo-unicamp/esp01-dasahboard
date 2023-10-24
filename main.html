@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Line Follower Robot</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://kit.fontawesome.com/0710f05f91.js" crossorigin="anonymous"></script>
+        <style>
+            body {
+                margin: 0;
+                background-color: rgb(233, 233, 229);
+                width: 100vw;
+                font-family: Verdana, sans-serif;
+                font-size: 2vh;
+                overflow: auto;
+            }
+
+            .header {
+                width: 100%;
+                background-color: white;
+                box-sizing: border-box;
+                padding: 1em 0 1em 0;
+                margin-bottom: 1.5em;
+            }
+
+            .header .title {
+                margin: auto;
+                margin-left: 1.5em;
+                font-size: 1.5vh;
+            }
+
+            footer {
+                position: fixed;
+                bottom: 0;
+                background: white;
+                width: 100vw;
+                padding: 1em 1em 1em 0;
+                font-size: 1vh;
+                text-align: right;
+                box-sizing: border-box;
+            }
+
+            .cards-area {
+                width: 90%;
+                max-width: 1500px;
+                margin: auto;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .sub-area {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .card {
+                background-color: white;
+                border-radius: 0.5em;
+                box-shadow: 0 0 1em rgb(187, 187, 187);
+                font-size: 0.7em;
+            }
+
+            .card .title {
+                background-color: rgb(241, 237, 237);
+                width: 100%;
+                border-top-left-radius: 0.5em;
+                border-top-right-radius: 0.5em;
+                padding: 0.5em 0 0.6em 1em;
+                box-sizing: border-box;
+            }
+
+            .card .icon {
+                display: inline-block;
+                border-radius: 0.5em;
+                background-color: rgb(173, 171, 171);
+                font-size: 2em;
+                color: white;
+                width: 2em;
+                padding: 0.4em 0 0.4em 0;
+                text-align: center;
+                vertical-align: middle;
+            }
+            
+            .card.hs {height: 10em;}
+            .card.hm {height: 20em;}
+            .card.hb {height: 30em;}
+            .card.wb {flex: 0 1 100%;}
+
+            .chart {
+                width: 80%;
+                height: 85%;
+                margin: auto;
+                margin-top: 1.5em;
+            }
+
+            .value {
+                margin-top: 1em;
+                font-size: 2em;
+                text-align: center;
+            }
+
+            .unit {
+                font-size: 0.7em;
+            }
+
+            .joypad {
+                position: relative;
+                margin: auto;
+                width: 15em;
+                height: 15em;
+                margin-top: 1.5em;
+            }
+
+            .joypad button {
+                width: 2.5em;
+                height: 2.5em;
+                font-size: 2em;
+            }
+
+            .joypad button.left {
+                position: absolute;
+                top: 2.5em;
+                left: 0em;
+            }
+
+            .joypad button.right {
+                position: absolute;
+                top: 2.5em;
+                left: 5em;
+            }
+
+            .joypad button.up {
+                position: absolute;
+                top: 0em;
+                left: 2.5em;
+            }
+
+            .joypad button.down {
+                position: absolute;
+                top: 5em;
+                left: 2.5em;
+            }
+
+
+            @media screen and (min-width: 500px) {
+                .card{margin-bottom: 0.5em;}
+                .ws {flex: 0 1 49%;}
+                .wm {flex: 0 1 100%;}
+            }
+
+            @media screen and (min-width: 1100px) {
+                .card{margin-bottom: 1em;}
+                .ws {flex: 0 1 24%;}
+                .wm {flex: 0 1 49.5%;}
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <div class="header">
+            <div class="title">LINE FOLLOWER ROBOT</div>
+        </div>
+        <div class="cards-area">
+            <div class="card wm hm">
+                <div class="title">Robot Control</div>
+                <div class="joypad">
+                    <button class="left">&#8592;</button>
+                    <button class="up">&#8593;</button>
+                    <button class="right">&#8594;</button>
+                    <button class="down">&#8595;</button>
+                </div>
+            </div>
+            <div class="sub-area wm hb">
+                <div class="card ws hs">
+                    <div class="title">Batery</div>
+                    <div class="value">
+                        100 <a class="unit">%</a>
+                    </div>
+                </div>
+                <div class="card ws hs">
+                    <div class="title">Distance Travelled</div>
+                    <div class="value">
+                        10.4 <a class="unit">m</a>
+                    </div>
+                </div>
+                <div class="card ws hs">
+                    <div class="title">Wheel Angular Speed</div>
+                    <div class="value">
+                        10.6 <a class="unit">rad/s</a>
+                    </div>
+                </div>
+                <div class="card ws hs">
+                    <div class="title">Wheel Linear Speed</div>
+                </div>
+                <div class="card ws hs">
+                    <div class="title">Wheel Linear Speed</div>
+                </div>
+                <div class="card ws hs">
+                    <div class="title">Wheel Linear Speed</div>
+                </div>
+                <div class="card ws hs">
+                    <div class="title">Wheel Linear Speed</div>
+                </div>
+                <div class="card ws hs">
+                    <div class="title">Wheel Linear Speed</div>
+                </div>
+            </div>
+            <div class="card wm hm">
+                <div class="title">Robot Linear Speed</div>
+            </div>
+            <div class="card wm hm">
+                <div class="title">Angular Speed</div>
+            </div>
+            <div class="card wb hb">
+                <div class="title">Robot Position</div>
+                <div class="chart">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <footer>
+            © Code Developed by Leonardo Rossi Leão
+        </footer>
+
+        <script>
+            var ctx = document.getElementById("myChart").getContext('2d');
+
+            var data = [{x: 0, y: 0}, 
+                        {x: 1, y: 1},
+                        {x: 2, y: 2},
+                        {x: 3, y: 2},
+                        {x: 4, y: 2},
+                        {x: 5, y: 2},
+                        {x: 6, y: 2},
+                        {x: 6, y: 3},
+                        {x: 6, y: 4},
+                        {x: 6, y: 5},
+                        {x: 6, y: 6},];
+                        
+            var options = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                },
+            };
+
+            var myChart = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        data: data,
+                        borderColor: '#2196f3',        
+                        backgroundColor: '#2196f3',
+                        showLine: true,
+                    }]
+                },
+                options: options
+            });
+        </script>
+    </body>
+</html>
